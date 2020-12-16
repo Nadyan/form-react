@@ -1,4 +1,4 @@
-import { Button } from '@material-ui/core';
+import { Button, TextField } from '@material-ui/core';
 import React, { Fragment } from 'react';
 
 export default function RegistrationForm() {
@@ -9,14 +9,30 @@ export default function RegistrationForm() {
         <Fragment>
             <h1>Registration Form</h1>
             <form>
-                <label>First name</label>
-                <input type="text"></input>
 
-                <label>Last name</label>
-                <input type="text"></input>
+                <TextField 
+                    id="field-first-name" 
+                    label="First name" 
+                    variant="outlined" 
+                    size="small" 
+                    fullWidth="true"
+                />
 
-                <label>Social ID</label>
-                <input type="text"></input>
+                <TextField 
+                    id="field-last-name" 
+                    label="Last name" 
+                    variant="outlined" 
+                    size="small" 
+                    fullWidth="true"
+                />
+
+                <TextField 
+                    id="field-social-id" 
+                    label="Social ID" 
+                    variant="outlined" 
+                    size="small" 
+                    fullWidth="true"
+                />
 
                 <label>Hints</label>
                 <input type="checkbox"></input>
