@@ -1,21 +1,32 @@
-import { Button, TextField, Switch, Checkbox } from '@material-ui/core';
 import React from 'react';
+import 'fontsource-roboto';
+import { 
+    Button, 
+    TextField, 
+    Switch, 
+    Checkbox, 
+    Container, 
+    FormControlLabel,
+    Typography
+} from '@material-ui/core';
 
 export default function RegistrationForm() {
 
     // aahooooy!
 
     return (
-        <div>
-            <h1>Registration Form</h1>
+        <Container component="article" maxWidth="sm">
+            <Typography variant="h3">
+                Registration Form
+            </Typography>
             <form>
-
                 <TextField 
                     id="field-first-name" 
                     label="First name" 
                     variant="outlined" 
                     size="small" 
                     fullWidth="true"
+                    margin="dense"
                 />
 
                 <TextField 
@@ -24,6 +35,7 @@ export default function RegistrationForm() {
                     variant="outlined" 
                     size="small" 
                     fullWidth="true"
+                    margin="dense"
                 />
 
                 <TextField 
@@ -32,24 +44,36 @@ export default function RegistrationForm() {
                     variant="outlined" 
                     size="small" 
                     fullWidth="true"
+                    margin="dense"
                 />
 
-                <Switch 
-                    id="field-hints"
-                    label="Hints"
-                    size="small"
+                <FormControlLabel
+                    control = {
+                        <Switch 
+                            id="field-hints"
+                            size="small"
+                            color="primary"
+                        />
+                    }
+                    label = "Hints"
                 />
 
-                <Checkbox
-                    id="field-newsletter"
+                <FormControlLabel
+                    control = {
+                        <Checkbox
+                            id="field-newsletter"
+                            label="Newsletter"
+                            size="small"
+                            color="primary"
+                        />
+                    }
                     label="Newsletter"
-                    size="small"
                 />
 
                 <Button type="submit" variant="contained" color="primary">
                     Send
                 </Button>
             </form>
-        </div>
+        </Container>
     );
 }
