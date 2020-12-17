@@ -1,12 +1,12 @@
-import { Button, TextField } from '@material-ui/core';
-import React, { Fragment } from 'react';
+import { Button, TextField, Switch, Checkbox } from '@material-ui/core';
+import React from 'react';
 
 export default function RegistrationForm() {
 
     // aahooooy!
 
     return (
-        <Fragment>
+        <div>
             <h1>Registration Form</h1>
             <form>
 
@@ -34,16 +34,22 @@ export default function RegistrationForm() {
                     fullWidth="true"
                 />
 
-                <label>Hints</label>
-                <input type="checkbox"></input>
+                <Switch 
+                    id="field-hints"
+                    label="Hints"
+                    size="small"
+                />
 
-                <label>Newsletter</label>
-                <input type="checkbox"></input>
+                <Checkbox
+                    id="field-newsletter"
+                    label="Newsletter"
+                    size="small"
+                />
 
                 <Button type="submit" variant="contained" color="primary">
                     Send
                 </Button>
             </form>
-        </Fragment>
+        </div>
     );
 }
