@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import 'fontsource-roboto';
+import validaCPF from './validate';
 import { 
     Button, 
     TextField, 
@@ -11,8 +12,6 @@ import {
 } from '@material-ui/core';
 
 export default function RegistrationForm() {
-
-    // aahooooy!
 
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -45,6 +44,7 @@ export default function RegistrationForm() {
             hints,
             newsletter
         };
+        console.log(dados);
     }
 
     function handleValidate(value, id) {
@@ -56,14 +56,12 @@ export default function RegistrationForm() {
 
             if (value.length !== 11) {
                 valid = false;
-                text = 'Social ID must have 11 digits'
+                text = 'Social ID must have 11 digits';
             }
-            /* TODO: Social Id validation funtion
-            else if (!isValidSocialId(value)) {
+            else if (!validaCPF(value)) {
                 valid = false;
                 text = 'Social ID number is invalid'
             }
-            */
             
             setError({
                 socialId: {
@@ -135,7 +133,7 @@ export default function RegistrationForm() {
                     label="First name" 
                     variant="outlined" 
                     size="small" 
-                    fullWidth="true"
+                    fullWidth={true}
                     margin="dense"
                     value={firstName}
                     onChange={e => {setFirstName(e.target.value)}}
@@ -149,7 +147,7 @@ export default function RegistrationForm() {
                     label="Last name" 
                     variant="outlined" 
                     size="small" 
-                    fullWidth="true"
+                    fullWidth={true}
                     margin="dense"
                     value={lastName}
                     onChange={e => {setLastName(e.target.value)}}
@@ -163,7 +161,7 @@ export default function RegistrationForm() {
                     label="Social ID" 
                     variant="outlined" 
                     size="small" 
-                    fullWidth="true"
+                    fullWidth={true}
                     margin="dense"
                     value={socialId}
                     onChange={e => {setSocialId(e.target.value)}}
