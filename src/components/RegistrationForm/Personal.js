@@ -5,7 +5,7 @@ import { Button, TextField, Container, FormControlLabel, Switch, Checkbox } from
 
 import validaCPF from './validate';
 
-export default function PersonalInfo() {
+export default function PersonalInfo(props) {
 
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -29,17 +29,19 @@ export default function PersonalInfo() {
         }
     );
 
+    /*
     function handleSubmit(event) {
         event.preventDefault();
-        const dados = {
+        const data = {
             firstName,
             lastName,
             socialId, 
             hints,
             newsletter
         };
-        console.log(dados);
+        console.log(data);
     }
+    */
 
     function handleValidate(value, id) {
         
@@ -118,7 +120,7 @@ export default function PersonalInfo() {
 
     return (
         <Container component="article" maxWidth="sm">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={props.onSubmit}>
                 <TextField 
                     id="field-first-name" 
                     label="First name" 
@@ -131,6 +133,7 @@ export default function PersonalInfo() {
                     error={!error.firstName.valid}
                     helperText={error.firstName.text}
                     onBlur={e => {handleValidate(e.target.value, e.target.id)}}
+                    required
                 />
 
                 <TextField 
@@ -145,6 +148,7 @@ export default function PersonalInfo() {
                     error={!error.lastName.valid}
                     helperText={error.lastName.text}
                     onBlur={e => {handleValidate(e.target.value, e.target.id)}}
+                    required
                 />
 
                 <TextField 
@@ -159,6 +163,7 @@ export default function PersonalInfo() {
                     error={!error.socialId.valid}
                     helperText={error.socialId.text}
                     onBlur={e => {handleValidate(e.target.value, e.target.id)}}
+                    required
                 />
 
                 <FormControlLabel
@@ -189,7 +194,7 @@ export default function PersonalInfo() {
                 />
 
                 <Button type="submit" variant="contained" color="primary">
-                    Send
+                    Next
                 </Button>
             </form>
         </Container>

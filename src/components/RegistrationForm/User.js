@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import 'fontsource-roboto';
 import { Button, TextField, Container } from '@material-ui/core';
 
-export default function UserInfo() {
+export default function UserInfo(props) {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -20,14 +20,16 @@ export default function UserInfo() {
         }
     );
 
+    /*
     function handleSubmit(event) {
         event.preventDefault();
-        const dados = {
+        const data = {
             email,
             password,
         };
-        console.log(dados);
+        console.log(data);
     }
+    */
 
     function handleValidate(value, id) {
         
@@ -74,7 +76,7 @@ export default function UserInfo() {
 
     return (
         <Container component="article" maxWidth="sm">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={props.onSubmit}>
                 <TextField 
                     type="email"
                     id="field-email" 
@@ -88,6 +90,7 @@ export default function UserInfo() {
                     error={!error.email.valid}
                     helperText={error.email.text}
                     onBlur={e => {handleValidate(e.target.value, e.target.id)}}
+                    required
                 />
 
                 <TextField 
@@ -103,10 +106,11 @@ export default function UserInfo() {
                     error={!error.password.valid}
                     helperText={error.password.text}
                     onBlur={e => {handleValidate(e.target.value, e.target.id)}}
+                    required
                 />
 
                 <Button type="submit" variant="contained" color="primary">
-                    Send
+                    Next
                 </Button>
             </form>
         </Container>
