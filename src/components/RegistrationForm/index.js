@@ -1,32 +1,54 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import UserInfo from './User';
 import PersonalInfo from './Personal';
 import AddressInfo from './Address';
+import Finish from './Finish';
 
 import { Container, Typography } from '@material-ui/core';
 import 'fontsource-roboto';
 
 export default function RegistrationForm() {
    
+    const [data, setData] = useState({});
     const [step, setStep] = useState(0);
     const steps = [
-        <UserInfo onSubmit={nextStep} />,
-        <PersonalInfo onSubmit={nextStep} />,
-        <AddressInfo onSubmit={onSubmit} />
+        <UserInfo onSubmit={storeData} />,
+        <PersonalInfo onSubmit={storeData} />,
+        <AddressInfo onSubmit={storeData} />,
+        <Finish />
     ];
 
-    function nextStep() {
-        setStep(step + 1);
+    /*
+    useEffect(() => {
+        console.log(data);
+    });
+    */
+
+    function changeStep(direction) {
+        if (direction === 'next') {
+            setStep(step + 1);
+        } else if (direction === 'previous') {
+            setStep(step - 1);
+        }
     }
 
-    function onSubmit(event) {
-        event.preventDefault();
-        alert('Form sent');
-    }
-   
     function showStep(step) {
         return steps[step];
+    }
+
+    function onSubmit() {
+        console.log(data);
+    }
+
+    function storeData(stepData, nextStep) {
+        setData({...data, ...stepData});
+        if (nextStep === 'finish') {
+            changeStep('next');
+            onSubmit();
+        } else {
+            changeStep(nextStep);
+        }
     }
 
     return (

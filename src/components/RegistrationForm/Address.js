@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import { TextField, Button, Container } from '@material-ui/core';
 import 'fontsource-roboto';
+import './style.css';
 
 export default function AddressInfo(props) {
 
@@ -26,9 +27,17 @@ export default function AddressInfo(props) {
     }
     */
 
+    function changeStep(direction) {
+        const data = {street, number, city, state, country, postalCode};
+        props.onSubmit(data, direction);
+    }
+
     return (
         <Container component="article" maxWidth="sm">
-            <form onSubmit={props.onSubmit}>
+            <form onSubmit={e => {
+                e.preventDefault();
+                changeStep('finish');
+            }}>
                 <TextField 
                     type="text"
                     id="field-street" 
@@ -107,9 +116,22 @@ export default function AddressInfo(props) {
                     required
                 />
 
-                <Button type="submit" variant="contained" color="primary" fullWidth>
-                    Submit
-                </Button>
+                <Container align="center" className="button-container">
+                    <Button 
+                        variant="contained" 
+                        color="secondary" 
+                        fullWidth 
+                        onClick={e => {
+                            e.preventDefault();
+                            changeStep('previous');
+                        }}
+                    >
+                        Previous
+                    </Button>
+                    <Button type="submit" variant="contained" color="primary" fullWidth>
+                        Next
+                    </Button>
+                </Container>
             </form>
         </Container>
     );

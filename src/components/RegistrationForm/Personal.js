@@ -4,6 +4,7 @@ import 'fontsource-roboto';
 import { Button, TextField, Container, FormControlLabel, Switch, Checkbox } from '@material-ui/core';
 
 import validaCPF from './validate';
+import './style.css';
 
 export default function PersonalInfo(props) {
 
@@ -118,9 +119,17 @@ export default function PersonalInfo(props) {
         }
     }
 
+    function changeStep(direction) {
+        const data = {firstName, lastName, socialId, hints, newsletter};
+        props.onSubmit(data, direction);
+    }
+
     return (
         <Container component="article" maxWidth="sm">
-            <form onSubmit={props.onSubmit}>
+            <form onSubmit={e => {
+                e.preventDefault();
+                changeStep('next');
+            }}>
                 <TextField 
                     id="field-first-name" 
                     label="First name" 
@@ -166,36 +175,46 @@ export default function PersonalInfo(props) {
                     required
                 />
 
-                <FormControlLabel
-                    control = {
-                        <Switch 
-                            id="field-hints"
-                            size="small"
-                            color="primary"
-                            checked={hints}
-                            onChange={e => {setHints(e.target.checked)}}
-                        />
-                    }
-                    label = "Hints"
-                />
+                <Container align="center" className="button-container">
+                    <FormControlLabel
+                        control = {
+                            <Switch 
+                                id="field-hints"
+                                size="small"
+                                color="primary"
+                                checked={hints}
+                                onChange={e => {setHints(e.target.checked)}}
+                            />
+                        }
+                        label = "Hints"
+                    />
 
-                <FormControlLabel
-                    control = {
-                        <Checkbox
-                            id="field-newsletter"
-                            label="Newsletter"
-                            size="small"
-                            color="primary"
-                            checked={newsletter}
-                            onChange={e => setNewsletter(e.target.checked)}
-                        />
-                    }
-                    label="Newsletter"
-                />
+                    <FormControlLabel
+                        control = {
+                            <Checkbox
+                                id="field-newsletter"
+                                label="Newsletter"
+                                size="small"
+                                color="primary"
+                                checked={newsletter}
+                                onChange={e => setNewsletter(e.target.checked)}
+                            />
+                        }
+                        label="Newsletter"
+                    />
+                </Container>
 
-                <Button type="submit" variant="contained" color="primary">
-                    Next
-                </Button>
+                <Container align="center" className="button-container">
+                    <Button variant="contained" color="secondary" fullWidth onClick={e => {
+                        e.preventDefault();
+                        changeStep('previous');
+                    }}>
+                        Previous
+                    </Button>
+                    <Button type="submit" variant="contained" color="primary" fullWidth>
+                        Next
+                    </Button>
+                </Container>
             </form>
         </Container>
     );

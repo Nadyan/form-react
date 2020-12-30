@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import 'fontsource-roboto';
 import { Button, TextField, Container } from '@material-ui/core';
+import './style.css';
 
 export default function UserInfo(props) {
 
@@ -30,6 +31,11 @@ export default function UserInfo(props) {
         console.log(data);
     }
     */
+
+    function changeStep(direction) {
+        const data = {email, password};
+        props.onSubmit(data, direction);
+    }
 
     function handleValidate(value, id) {
         
@@ -76,7 +82,10 @@ export default function UserInfo(props) {
 
     return (
         <Container component="article" maxWidth="sm">
-            <form onSubmit={props.onSubmit}>
+            <form onSubmit={e => {
+                e.preventDefault();
+                changeStep('next');
+            }}>
                 <TextField 
                     type="email"
                     id="field-email" 
@@ -109,9 +118,11 @@ export default function UserInfo(props) {
                     required
                 />
 
-                <Button type="submit" variant="contained" color="primary">
+                
+                <Button type="submit" variant="contained" color="primary" fullWidth>
                     Next
                 </Button>
+                
             </form>
         </Container>
     );
