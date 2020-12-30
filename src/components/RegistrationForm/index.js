@@ -12,6 +12,7 @@ export default function RegistrationForm() {
    
     const [data, setData] = useState({});
     const [step, setStep] = useState(0);
+    const [finish, setFinish] = useState(false);
     const steps = [
         <UserInfo onSubmit={storeData} />,
         <PersonalInfo onSubmit={storeData} />,
@@ -19,11 +20,9 @@ export default function RegistrationForm() {
         <Finish />
     ];
 
-    /*
     useEffect(() => {
-        console.log(data);
-    });
-    */
+        onSubmit();
+    }, [finish]);
 
     function changeStep(direction) {
         if (direction === 'next') {
@@ -38,6 +37,7 @@ export default function RegistrationForm() {
     }
 
     function onSubmit() {
+        // save data to database and stuff...
         console.log(data);
     }
 
@@ -45,7 +45,7 @@ export default function RegistrationForm() {
         setData({...data, ...stepData});
         if (nextStep === 'finish') {
             changeStep('next');
-            onSubmit();
+            setFinish(true);
         } else {
             changeStep(nextStep);
         }
