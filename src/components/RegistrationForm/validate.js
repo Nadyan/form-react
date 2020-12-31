@@ -105,3 +105,15 @@ export function handleValidate(value, id) {
 
     return {valid: valid, text: text};
 }
+
+export function verifyAllValid(fields) {
+    let allValid = true;
+
+    for (let field in fields) {
+        if (!fields[field].valid) {
+            allValid = false;
+        }
+    }
+
+    return allValid;
+}

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import 'fontsource-roboto';
 import { Button, TextField, Container } from '@material-ui/core';
 
-import { handleValidate } from './validate';
+import { handleValidate, verifyAllValid } from './validate';
 import './style.css';
 
 export default function UserInfo(props) {
@@ -39,7 +39,9 @@ export default function UserInfo(props) {
         <Container component="article" maxWidth="sm">
             <form onSubmit={e => {
                 e.preventDefault();
-                changeStep('next');
+                if (verifyAllValid(error)) {
+                    changeStep('next');
+                }
             }}>
                 <TextField 
                     type="email"
