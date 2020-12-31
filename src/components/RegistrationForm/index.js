@@ -5,7 +5,7 @@ import PersonalInfo from './Personal';
 import AddressInfo from './Address';
 import Finish from './Finish';
 
-import { Container, Typography } from '@material-ui/core';
+import { Container, Typography, Stepper, Step, StepLabel } from '@material-ui/core';
 import 'fontsource-roboto';
 
 export default function RegistrationForm() {
@@ -56,7 +56,12 @@ export default function RegistrationForm() {
             <Typography variant="h3" align="center">
                 Registration Form
             </Typography>
-            
+            <Stepper activeStep={step}>
+                <Step><StepLabel>Login</StepLabel></Step>
+                <Step><StepLabel>Personal</StepLabel></Step>
+                <Step><StepLabel>Address</StepLabel></Step>
+                <Step><StepLabel>Done!</StepLabel></Step>
+            </Stepper>
             {
                 showStep(step)
             }
