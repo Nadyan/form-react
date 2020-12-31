@@ -62,3 +62,46 @@ function somaNumeros(cpf, nDigitos, peso) {
     
     return soma;
 }
+
+export function handleValidate(value, id) {
+        
+    let valid = true;
+    let text = '';
+
+    if (id === 'email') {
+        var re = /\S+@\S+\.\S+/; // regular expression
+        if (!re.test(value)) {
+            valid = false;
+            text = 'Invalid e-mail.';
+        }
+    } else if (id === 'password') {
+        if (value.length < 8) {
+            valid = false;
+            text ="Password must have at least 8 characters"
+        }
+    }
+
+    if (id === 'socialId') {
+
+        if (value.length !== 11) {
+            valid = false;
+            text = 'Social ID must have 11 digits';
+        }
+        else if (!validaCPF(value)) {
+            valid = false;
+            text = 'Social ID number is invalid'
+        }
+    } else if (id === 'firstName') {
+        if (value.length === 0) {
+            valid = false;
+            text ="First name can't be blank"
+        }
+    } else if (id === 'lastName') {
+        if (value.length === 0) {
+            valid = false;
+            text ="Last name can't be blank"
+        }
+    }
+
+    return {valid: valid, text: text};
+}

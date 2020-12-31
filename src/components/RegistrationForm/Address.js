@@ -13,20 +13,6 @@ export default function AddressInfo(props) {
     const [country, setCountry] = useState('');
     const [postalCode, setPostalCode] = useState('');
 
-    /*
-    function handleSubmit(event) {
-        event.preventDefault();
-        const data = {
-            street,
-            number,
-            city,
-            country,
-            postalCode
-        };
-        console.log(data);
-    }
-    */
-
     function changeStep(direction) {
         const data = {street, number, city, state, country, postalCode};
         props.onSubmit(data, direction);
@@ -48,7 +34,6 @@ export default function AddressInfo(props) {
                     margin="dense"
                     value={street}
                     onChange={e => {setStreet(e.target.value)}}
-                    required
                 />
 
                 <TextField 
@@ -61,7 +46,6 @@ export default function AddressInfo(props) {
                     margin="dense"
                     value={number}
                     onChange={e => {setNumber(e.target.value)}}
-                    required
                 />
 
                 <TextField 
@@ -74,7 +58,6 @@ export default function AddressInfo(props) {
                     margin="dense"
                     value={city}
                     onChange={e => {setCity(e.target.value)}}
-                    required
                 />
 
                 <TextField 
@@ -87,7 +70,6 @@ export default function AddressInfo(props) {
                     margin="dense"
                     value={state}
                     onChange={e => {setStateAdd(e.target.value)}}
-                    required
                 />
 
                 <TextField 
@@ -100,7 +82,6 @@ export default function AddressInfo(props) {
                     margin="dense"
                     value={country}
                     onChange={e => {setCountry(e.target.value)}}
-                    required
                 />
 
                 <TextField 
@@ -113,7 +94,6 @@ export default function AddressInfo(props) {
                     margin="dense"
                     value={postalCode}
                     onChange={e => {setPostalCode(e.target.value)}}
-                    required
                 />
 
                 <Container align="center" className="button-container">

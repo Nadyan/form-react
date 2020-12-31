@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import 'fontsource-roboto';
 import { Button, TextField, Container, FormControlLabel, Switch, Checkbox } from '@material-ui/core';
 
-import validaCPF from './validate';
+import { handleValidate } from './validate';
 import './style.css';
 
 export default function PersonalInfo(props) {
@@ -30,93 +30,11 @@ export default function PersonalInfo(props) {
         }
     );
 
-    /*
-    function handleSubmit(event) {
-        event.preventDefault();
-        const data = {
-            firstName,
-            lastName,
-            socialId, 
-            hints,
-            newsletter
-        };
-        console.log(data);
-    }
-    */
-
-    function handleValidate(value, id) {
-        
-        let valid = true;
-        let text = '';
-
-        if (id === 'field-social-id') {
-
-            if (value.length !== 11) {
-                valid = false;
-                text = 'Social ID must have 11 digits';
-            }
-            else if (!validaCPF(value)) {
-                valid = false;
-                text = 'Social ID number is invalid'
-            }
-            
-            setError({
-                socialId: {
-                    valid: valid,
-                    text: text
-                },
-                firstName: {
-                    valid: error.firstName.valid,
-                    text: error.firstName.text
-                },
-                lastName: {
-                    valid: error.lastName.valid,
-                    text: error.lastName.text
-                }
-            });
-        } else if (id === 'field-first-name') {
-            
-            if (value.length === 0) {
-                valid = false;
-                text ="Last name can't be blank"
-            }
-            
-            setError({
-                socialId: {
-                    valid: error.socialId.valid,
-                    text: error.socialId.text
-                },
-                firstName: {
-                    valid: valid,
-                    text: text
-                },
-                lastName: {
-                    valid: error.lastName.valid,
-                    text: error.lastName.text
-                }
-            });
-        } else if (id === 'field-last-name') {
-            
-            if (value.length === 0) {
-                valid = false;
-                text ="Last name can't be blank"
-            }
-
-            setError({
-                socialId: {
-                    valid: error.socialId.valid,
-                    text: error.socialId.text
-                },
-                firstName: {
-                    valid: error.firstName.valid,
-                    text: error.firstName.text
-                },
-                lastName: {
-                    valid: valid,
-                    text: text
-                }
-            });
-        }
+    function callHandleValidate(event) {
+        const { name, value } = event.target;
+        const newState = {...error};
+        newState[name] = handleValidate(value, name);
+        setError(newState);
     }
 
     function changeStep(direction) {
@@ -132,6 +50,7 @@ export default function PersonalInfo(props) {
             }}>
                 <TextField 
                     id="field-first-name" 
+                    name="firstName"
                     label="First name" 
                     variant="outlined" 
                     size="small" 
@@ -141,12 +60,13 @@ export default function PersonalInfo(props) {
                     onChange={e => {setFirstName(e.target.value)}}
                     error={!error.firstName.valid}
                     helperText={error.firstName.text}
-                    onBlur={e => {handleValidate(e.target.value, e.target.id)}}
+                    onBlur={e => {callHandleValidate(e)}}
                     required
                 />
 
                 <TextField 
                     id="field-last-name" 
+                    name="lastName"
                     label="Last name" 
                     variant="outlined" 
                     size="small" 
@@ -156,12 +76,13 @@ export default function PersonalInfo(props) {
                     onChange={e => {setLastName(e.target.value)}}
                     error={!error.lastName.valid}
                     helperText={error.lastName.text}
-                    onBlur={e => {handleValidate(e.target.value, e.target.id)}}
+                    onBlur={e => {callHandleValidate(e)}}
                     required
                 />
 
                 <TextField 
                     id="field-social-id" 
+                    name="socialId"
                     label="Social ID" 
                     variant="outlined" 
                     size="small" 
@@ -171,7 +92,7 @@ export default function PersonalInfo(props) {
                     onChange={e => {setSocialId(e.target.value)}}
                     error={!error.socialId.valid}
                     helperText={error.socialId.text}
-                    onBlur={e => {handleValidate(e.target.value, e.target.id)}}
+                    onBlur={e => {callHandleValidate(e)}}
                     required
                 />
 
