@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { TextField, Button, Container } from '@material-ui/core';
 import 'fontsource-roboto';
 import './style.css';
+import useErrors from '../../hooks/useErrors';
 
 export default function AddressInfo(props) {
 
@@ -12,6 +13,9 @@ export default function AddressInfo(props) {
     const [state, setStateAdd] = useState('');
     const [country, setCountry] = useState('');
     const [postalCode, setPostalCode] = useState('');
+
+    // Custom Hook for field validation
+    // const [error, validateField] = useErrors();
 
     function changeStep(direction) {
         const data = {street, number, city, state, country, postalCode};
